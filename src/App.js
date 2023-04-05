@@ -12,16 +12,16 @@ import './style.css';
 class DatePicker extends React.Component {
   inputRef = null;
 
+  componentDidUpdate() {
+    $(this.inputRef).datepicker('setDate', this.props.value || '');
+  }
+
   componentDidMount() {
     $(this.inputRef).datepicker({
       dateFormat: 'dd/mm/yy',
       onSelect: this.props.SelectFunc,
     });
-  }
-
-  updateDate() {
-    $(this.inputRef).datepicker('setDate', this.props.value);
-  }
+  }  
 
   render() {
     return (
@@ -37,7 +37,7 @@ class DatePicker extends React.Component {
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {date: '1/4/2023'}
+    this.state = {date: ''}
     this.SelectFunc = this.SelectFunc.bind(this)
     this.Resetfunc = this.Resetfunc.bind(this)
   }
